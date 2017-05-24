@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BlackBoard</title>
+  <%= csrf_meta_tags %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+
+<div id="TopBar">
+
+  <nav class="navbar navbar-dark bg-inverse">
+
+    <div class="navbar">
+      <div class="navbar-inner">
+
+        <%= link_to landings_path do %>
+           <%= image_tag "title.png", class: "title" %>
+        <% end %>
+
+        <p/>
+        <ul class="nav">
+          <%= link_to 'MyBlogs', articles_path, class: 'button' %>
+          <%= link_to 'MyUploads', items_path, class: 'button' %>
+          <%= link_to 'MyClasses', lectures_path, class: 'button' %>
+          <%= link_to 'MyChatRooms', chat_rooms_path, class: 'button' %>
+        </ul>
+      </div>
+    </div>
+
+    <div id="userInfo" href="/blackBoard/index">
+      <%= link_to 'Current Account', current_account_index_path, class: 'navbar-brand btn btn-info' %>
+        <% if user_signed_in? %>
+          <ul class="nav navbar-nav pull-xs-right">
+            <li class="nav-item">
+              <span class="text-muted">Logged in as <strong><%= current_user.name %></strong></span>
+            </li>
+            <a class="brand" href="/blackBoard/index">
+              <img id="userAccount" height="100px" width="100px" />
+            </a>
+            <li id="logout" class="nav-item active">
+              <%= link_to 'Log out', destroy_user_session_path, method: :delete, class: 'nav-link btn btn-info' %>
+            </li>
+          </ul>
+        <% end %>
+    </div>
+
+  </nav>
+</div>
+
+<div class="container eggshell">
+  <%= yield %>
+</div>
+
+<footer>
+  <div class="container">
+    <p class="text-muted">Created by <%= link_to 'Foundaition credit Ilya Bodrov / BlackBoard James Noonan', 'http://bodrovis.tech' %></p>
+  </div>
+</footer>
+</body>
+</html>
